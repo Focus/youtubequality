@@ -1,0 +1,27 @@
+{
+  "name": "Set Youtube Quality",
+  "version": "0.1",
+  "manifest_version": 2,
+  "description": "Automatically sets the youtube quality.",
+  "permissions": [
+    "http://*.youtube.com/watch?*"
+  ],
+  "icons": { "16": "icon16.png",
+           "48": "icon48.png",
+          "128": "icon128.png" },
+  "content_scripts": [
+    {
+      "matches": ["http://*.youtube.com/watch?*", "https://*.youtube.com/watch?*"],
+      "js": ["yt.js"],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "browser_action": {
+    "default_icon": "icon128.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": ["background.js"]
+  }
+}

@@ -1,0 +1,61 @@
+
+<!doctype html>
+<html>
+  <head>
+    <title>Set Page Color Popup</title>
+	<style>
+div {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color: #123d54;
+	padding: 1px 2px;
+	background: -webkit-gradient(
+		linear, left top, left bottom, 
+		from(#afd9fa),
+		to(#588fad));
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	border: 1px solid #003366;
+	-webkit-box-shadow:
+		0px 1px 3px rgba(000,000,000,0.5),
+		inset 0px 0px 1px rgba(255,255,255,1);
+	box-shadow:
+		0px 1px 3px rgba(000,000,000,0.5),
+		inset 0px 0px 1px rgba(255,255,255,1);
+	text-shadow:
+		0px -1px 0px rgba(000,000,000,0.7),
+		0px 1px 0px rgba(255,255,255,0.3);
+		width: 50px;
+		text-align: center;
+}
+			
+    body {
+      overflow: hidden;
+      margin: 0px;
+      padding: 0px;
+      background: white;
+    }
+
+    div:first-child {
+      margin-top: 0px;
+    }
+    div:hover {
+      background: #98FF8F;
+	}
+
+	.current{
+	  background: #FF9696;
+	}
+    </style>
+    <script src="popup.js"></script>
+  </head>
+  <body>
+    <div id="1">1080</div>
+    <div id="2">720</div>
+    <div id="3">480</div>
+    <div id="4">360</div>
+    <div id="5">240</div>
+    <div id="6">144</div>
+  </body>
+</html>
+
