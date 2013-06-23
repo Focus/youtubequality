@@ -1,8 +1,8 @@
 {
   "name": "Set Youtube Quality",
-  "version": "0.1",
+  "version": "0.2",
   "manifest_version": 2,
-  "description": "Automatically sets the youtube quality.",
+  "description": "Automatically sets the Youtube quality.",
   "permissions": [
     "http://*.youtube.com/watch?*"
   ],

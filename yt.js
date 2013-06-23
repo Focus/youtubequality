@@ -5,7 +5,7 @@ function injectCode(){
 		inj.innerHTML =
 				["var quality_opt = ['highres', 'hd1080', 'hd720', 'large', 'medium', 'small', 'tiny', 'default'];",
 				"function changeQuality(player){",
-				"		if(player.getPlayerState() >= 0){",
+				"		if(typeof player.getPlayerState !== 'undefined' && player.getPlayerState() >= 0){",
 				"				player.pauseVideo();",
 				"				var levels = player.getAvailableQualityLevels();",
 				"				if(levels.length <= 0){", //Sometimes in HTML5 players the api isn't ready, even though it should be.
@@ -21,7 +21,7 @@ function injectCode(){
 				"				player.playVideo();",
 				"		}",
 				"		else{",
-				"				changeQuality(player);",
+				"				setTimeout(function(){changeQuality(player);},200);",
 				"		}",
 				"}", 
 				"function onYouTubePlayerReady(player){",
