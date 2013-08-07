@@ -1,17 +1,17 @@
 {
   "name": "Set Youtube Quality",
-  "version": "0.3",
+  "version": "0.4",
   "manifest_version": 2,
   "description": "Automatically sets the Youtube quality.",
   "permissions": [
-    "http://*.youtube.com/watch?*"
+    "http://*.youtube.com/*"
   ],
   "icons": { "16": "icon16.png",
            "48": "icon48.png",
           "128": "icon128.png" },
   "content_scripts": [
     {
-      "matches": ["http://*.youtube.com/watch?*", "https://*.youtube.com/watch?*"],
+      "matches": ["http://*.youtube.com/*", "https://*.youtube.com/*"],
       "js": ["yt.js"],
       "run_at": "document_idle",
       "all_frames": true

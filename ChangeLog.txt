@@ -1,0 +1,4 @@
+Set Youtube Quality (c) Bati Sengul 2013
+
+= 0.3 to 0.4 =
+* Extend permissions to whole youtube due to the new layout.
