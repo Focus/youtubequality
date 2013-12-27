@@ -1,4 +1,7 @@
 Set Youtube Quality (c) Bati Sengul 2013
+= 0.4 to 1.0 =
+* New logo and images.
+* Changes to the dropdown menu
 
 = 0.3 to 0.4 =
 * Extend permissions to whole youtube due to the new layout.
