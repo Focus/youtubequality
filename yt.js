@@ -1,39 +1,26 @@
 var quality = 0;
+var pause = false;
 
 function injectCode(){
-		var inj = document.createElement('script');
-		inj.innerHTML =
-				["var quality_opt = ['highres', 'hd1080', 'hd720', 'large', 'medium', 'small', 'tiny', 'default'];",
-				"function changeQuality(player){",
-				"		if(typeof player.getPlayerState !== 'undefined' && player.getPlayerState() >= 0){",
-				"				player.pauseVideo();",
-				"				var levels = player.getAvailableQualityLevels();",
-				"				if(levels.length <= 0){", //Sometimes in HTML5 players the api isn't ready, even though it should be.
-				"						setTimeout(function(){changeQuality(player);},200);",
-				"						return;",
-				"				}",
-				"				for(var i = " + quality + "; i < 8; i++){",
-				"						if(levels.indexOf(quality_opt[i]) >=0 ){",
-				"								player.setPlaybackQuality(quality_opt[i]);",
-				"								break;",
-				"						}",
-				"				}",
-				"				player.playVideo();",
-				"		}",
-				"		else{",
-				"				setTimeout(function(){changeQuality(player);},200);",
-				"		}",
-				"}", 
-				"function onYouTubePlayerReady(player){",
-				"		setTimeout(function(){changeQuality(player);},200);",
-				"}"].join('\n');
-		document.body.appendChild(inj);
+		var inj0 = document.createElement('script');
+		var inj1 = document.createElement('script');
+		inj0.type = "text/javascript";
+		inj0.src = chrome.extension.getURL('utils.js');
+		
+		inj1.innerHTML =
+				["function onYouTubePlayerReady(player){",
+				 "		setTimeout(function(){ytPlayerHook(player," + quality + "," + pause + ");},10);",
+				 "}"].join('\n');
+		document.head.appendChild(inj0);
+		document.head.appendChild(inj1);
 }
-
 
 chrome.extension.sendRequest({method: "getStatus"}, function(response) {
 		quality = response.status;
-		injectCode();
+		chrome.extension.sendRequest({method: "getPause"}, function(response) {
+				pause = response.status;
+				injectCode();
+		});
 });
 
 
