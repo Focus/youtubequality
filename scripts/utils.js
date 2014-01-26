@@ -54,7 +54,7 @@ function ytPlayerChange(event){
 		setTimeout(function(){ytPlayerChange(event);},mediumTimeout);
 		return;
 	}
-	if(event <= 0)
+	if(event == -1)
 		changeQuality();
 }
 

@@ -7,7 +7,7 @@ function save_options() {
 }
 
 function restore_options() {
-  var pause = localStorage["pause"];
+  var pause = localStorage["ytPause"];
   if(pause === "true")
 	document.getElementById("pause").checked = true;
   else

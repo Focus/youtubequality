@@ -7,6 +7,9 @@ function injectCode(){
 		var docFrag = document.createDocumentFragment();
 		inj0.type = "text/javascript";
 		inj0.src = chrome.extension.getURL('scripts/utils.js');
+		inj0.onload = function() {
+			this.parentNode.removeChild(this);
+		};
 		
 		inj1.innerHTML =
 				["function onYouTubePlayerReady(player){",
@@ -15,7 +18,8 @@ function injectCode(){
 		docFrag.appendChild(inj0);
 		docFrag.appendChild(inj1);
 		
-		document.head.appendChild(docFrag);
+		(document.head||document.documentElement).appendChild(docFrag);
+		inj1.parentNode.removeChild(inj1);
 }
 
 chrome.extension.sendRequest({method: "getStatus"}, function(response) {

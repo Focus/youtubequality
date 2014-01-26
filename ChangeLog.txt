@@ -1,4 +1,19 @@
 Set Youtube Quality (c) Bati Sengul 2013
+
+= 1.3 to 1.4 =
+* Bug fix where the code was not injected properly
+
+= 1.2 to 1.3 =
+* Fixed error with video looping
+
+= 1.1 to 1.2 =
+* Minor error with local storage name
+
+= 1.0 to 1.1 =
+* New method of changing quality
+* Ability to pause videos at the start
+* Cleaner file layout
+
 = 0.4 to 1.0 =
 * New logo and images.
 * Changes to the dropdown menu
