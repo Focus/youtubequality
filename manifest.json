@@ -1,6 +1,6 @@
 {
   "name": "YouTube Quality",
-  "version": "1.4",
+  "version": "1.5",
   "manifest_version": 2,
   "description": "Automatically sets the YouTube quality.",
   "permissions": [

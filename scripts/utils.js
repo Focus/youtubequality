@@ -1,4 +1,4 @@
-var quality_opt = ['highres', 'hdsmallTimeout80', 'hd720', 'large', 'medium', 'small', 'tiny', 'default'];
+var quality_opt = ['highres', 'hd1080', 'hd720', 'large', 'medium', 'small', 'tiny', 'default'];
 
 var sytqQuality = 2;
 var sytqPause = false;
@@ -12,7 +12,7 @@ var mediumTimeout = 100;
 var largeTimeout = 400;
 
 function forcePause(){
-	console.log('forcePause: '+ sytqPlayer.getPlayerState());
+	//console.log('forcePause: '+ sytqPlayer.getPlayerState());
 	if(sytqPlayer.getPlayerState() === -1){
 		setTimeout(function(){forcePause();}, largeTimeout);
 		return;
@@ -25,7 +25,7 @@ function forcePause(){
 }
 
 function changeQuality(){
-	console.log(sytqPlayer);
+	//console.log(sytqPlayer);
 	if(typeof sytqPlayer.getPlayerState !== 'undefined' && sytqPlayer.getPlayerState() >= 0){
 		var levels = sytqPlayer.getAvailableQualityLevels();
 		if(levels.length <= 0){		//Sometimes in HTML5 players the api isn't ready, even though it should be.
@@ -33,6 +33,8 @@ function changeQuality(){
 			return;
 		}
 		sytqPlayer.pauseVideo();
+		//console.log(levels);
+		//console.log(sytqQuality);
 		for(var i = sytqQuality; i < 8; i++){
 			if(levels.indexOf(quality_opt[i]) >=0 ){
 				sytqPlayer.setPlaybackQuality(quality_opt[i]);
@@ -49,7 +51,7 @@ function changeQuality(){
 }
 
 function ytPlayerChange(event){
-	console.log('ytPlayerChange: ' + event);
+	//console.log('ytPlayerChange: ' + event);
 	if(typeof sytqPlayer.getPlayerState === 'undefined' || sytqPlayer.getPlayerState() === -1 || sytqPlayer.getPlayerState() === 5){
 		setTimeout(function(){ytPlayerChange(event);},mediumTimeout);
 		return;
@@ -59,7 +61,7 @@ function ytPlayerChange(event){
 }
 
 function ytPlayerSetHooks(){
-	console.log('ytPlayerSetHooks');
+	//console.log('ytPlayerSetHooks');
 	if(typeof sytqPlayer.getPlayerState === 'undefined' || sytqPlayer.getPlayerState() < 0 ){
 		setTimeout(function(){ytPlayerSetHooks();},mediumTimeout);
 		return;
@@ -71,7 +73,7 @@ function ytPlayerSetHooks(){
 function ytPlayerHook(player, quality, pause){
 	if(hooked || typeof player !== 'object')
 		return;
-	console.log('ytPlayerHook');
+	//console.log('ytPlayerHook');
 	hooked = true;
 	sytqQuality = quality;
 	sytqPause = pause;
