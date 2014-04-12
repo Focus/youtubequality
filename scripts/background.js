@@ -14,5 +14,5 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
 		else if (request.method === "getPause")
 				sendResponse({status: pause});
 		else
-				sendResponse({}); // snub them.
+				sendResponse({});
 });

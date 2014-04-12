@@ -1,4 +1,4 @@
-var quality_opt = ['highres', 'hd1080', 'hd720', 'large', 'medium', 'small', 'tiny', 'default'];
+var quality_opt = ['highres', 'hd1440', 'hd1080', 'hd720', 'large', 'medium', 'small', 'tiny', 'default'];
 
 var sytqQuality = 2;
 var sytqPause = false;

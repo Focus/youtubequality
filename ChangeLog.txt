@@ -1,5 +1,8 @@
 Set Youtube Quality (c) Bati Sengul 2013
 
+= 1.5 to 1.6 =
+* Added options for 1080+ resolutions
+
 = 1.4 to 1.5 =
 * Fixed a bug where 1080 quality would default to 720
 
