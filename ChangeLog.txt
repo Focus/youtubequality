@@ -1,4 +1,7 @@
-Set Youtube Quality (c) Bati Sengul 2013
+Set Your Quality (c) Bati Sengul 2013
+
+= 1.6 to 1.7 =
+* Name change
 
 = 1.5 to 1.6 =
 * Added options for 1080+ resolutions
