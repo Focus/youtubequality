@@ -2,6 +2,7 @@ var quality_opt = ['highres', 'hd1440', 'hd1080', 'hd720', 'large', 'medium', 's
 
 var sytqQuality = 2;
 var sytqPause = false;
+var sytqKeepQuality = false;
 var sytqPlayer;
 
 var hooked = false;
@@ -25,7 +26,7 @@ function forcePause(){
 }
 
 function changeQuality(){
-	//console.log(sytqPlayer);
+	//console.dir(sytqPlayer);
 	if(typeof sytqPlayer.getPlayerState !== 'undefined' && sytqPlayer.getPlayerState() >= 0){
 		var levels = sytqPlayer.getAvailableQualityLevels();
 		if(levels.length <= 0){		//Sometimes in HTML5 players the api isn't ready, even though it should be.
@@ -35,6 +36,8 @@ function changeQuality(){
 		sytqPlayer.pauseVideo();
 		//console.log(levels);
 		//console.log(sytqQuality);
+
+		// set first available quality starting from settings down to default
 		for(var i = sytqQuality; i < 8; i++){
 			if(levels.indexOf(quality_opt[i]) >=0 ){
 				sytqPlayer.setPlaybackQuality(quality_opt[i]);
@@ -67,16 +70,27 @@ function ytPlayerSetHooks(){
 		return;
 	}
 	sytqPlayer.addEventListener("onStateChange", ytPlayerChange);
+	if (sytqKeepQuality)
+		sytqPlayer.addEventListener("onPlaybackQualityChange", onPlaybackQualityChange);
 	changeQuality();
 }
 
-function ytPlayerHook(player, quality, pause){
+function ytPlayerHook(player, quality, pause, keepquality){
 	if(hooked || typeof player !== 'object')
 		return;
-	//console.log('ytPlayerHook');
 	hooked = true;
 	sytqQuality = quality;
 	sytqPause = pause;
+	sytqKeepQuality = keepquality || false;
 	sytqPlayer = player;
 	ytPlayerSetHooks();
+}
+
+function onPlaybackQualityChange(suggestedQuality) {
+	//console.log('onPlaybackQualityChange(' + suggestedQuality + ')');
+	// if automatically set quality is higher than the quality set in the settings
+	if (quality_opt.indexOf(suggestedQuality) < sytqQuality) {
+		// change it back to the one in the settings
+		changeQuality();
+	}
 }
