@@ -1,6 +1,6 @@
 {
   "name": "Your Quality for YouTube™",
-  "version": "1.7",
+  "version": "1.8",
   "manifest_version": 2,
   "description": "Automatically sets the YouTube™ playback quality.",
   "permissions": [

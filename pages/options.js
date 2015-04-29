@@ -1,4 +1,9 @@
 function save_options() {
+  localStorage['ytHighPref'] = document.getElementById("highpref").checked;
+  if(localStorage['ytHighPref'] === "true")
+	chrome.extension.getBackgroundPage().highpref = true;
+  else
+	chrome.extension.getBackgroundPage().highpref = false;
   localStorage['ytPause'] = document.getElementById("pause").checked;
   if(localStorage['ytPause'] === "true")
 	chrome.extension.getBackgroundPage().pause = true;
@@ -7,6 +12,11 @@ function save_options() {
 }
 
 function restore_options() {
+  var highpref = localStorage["ytHighPref"];
+  if(highpref === "true")
+	document.getElementById("highpref").checked = true;
+  else
+	document.getElementById("highpref").checked = false;
   var pause = localStorage["ytPause"];
   if(pause === "true")
 	document.getElementById("pause").checked = true;
@@ -14,4 +24,5 @@ function restore_options() {
 	document.getElementById("pause").checked = false;
 }
 document.addEventListener('DOMContentLoaded', restore_options);
+document.querySelector('#highpref').addEventListener('change', save_options);
 document.querySelector('#pause').addEventListener('change', save_options);

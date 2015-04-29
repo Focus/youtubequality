@@ -1,5 +1,9 @@
 Set Your Quality (c) Bati Sengul 2013
 
+= 1.7 to 1.8 =
+* Added option for (high/low) video quality preference.
+* Fix the option for 2160p resolution.
+
 = 1.6 to 1.7 =
 * Name change
 

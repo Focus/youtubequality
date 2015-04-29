@@ -1,11 +1,11 @@
-var quality_opt = ['highres', 'hd1440', 'hd1080', 'hd720', 'large', 'medium', 'small', 'tiny', 'default'];
+var quality_opt = ['hd2160', 'hd1440', 'hd1080', 'hd720', 'large', 'medium', 'small', 'tiny', 'default'];
 
 var sytqQuality = 2;
+var sytqHighPref = false;
 var sytqPause = false;
 var sytqPlayer;
 
 var hooked = false;
-
 
 var smallTimeout = 10;
 var mediumTimeout = 100;
@@ -35,14 +35,46 @@ function changeQuality(){
 		sytqPlayer.pauseVideo();
 		//console.log(levels);
 		//console.log(sytqQuality);
-		for(var i = sytqQuality; i < 8; i++){
-			if(levels.indexOf(quality_opt[i]) >=0 ){
-				sytqPlayer.setPlaybackQuality(quality_opt[i]);
-				break;
+		var i = sytqQuality;
+		var found = false;
+		if(sytqHighPref) // high quality is preferable
+		{
+			for(i = sytqQuality; i >= 0; i--){
+				if(levels.indexOf(quality_opt[i]) >=0 ){
+					found = true;
+					break;
+				}
+			}
+			if(!found){
+				for(i = sytqQuality + 1; i < 8; i++){
+					if(levels.indexOf(quality_opt[i]) >=0 ){
+						found = true;
+						break;
+					}
+				}
 			}
 		}
+		else // low quality is preferable
+		{
+			for(i = sytqQuality; i < 8; i++){
+				if(levels.indexOf(quality_opt[i]) >=0 ){
+					found = true;
+					break;
+				}
+			}
+			if(!found){
+				for(i = sytqQuality - 1; i >= 0; i--){
+					if(levels.indexOf(quality_opt[i]) >=0 ){
+						found = true;
+						break;
+					}
+				}
+			}
+		}
+		if(found)
+			sytqPlayer.setPlaybackQuality(quality_opt[i]);
 		if(sytqPause)
-				forcePause();
+			forcePause();
 		else
 			sytqPlayer.playVideo();
 	}
@@ -70,12 +102,13 @@ function ytPlayerSetHooks(){
 	changeQuality();
 }
 
-function ytPlayerHook(player, quality, pause){
+function ytPlayerHook(player, quality, highpref, pause){
 	if(hooked || typeof player !== 'object')
 		return;
 	//console.log('ytPlayerHook');
 	hooked = true;
 	sytqQuality = quality;
+	sytqHighPref = highpref;
 	sytqPause = pause;
 	sytqPlayer = player;
 	ytPlayerSetHooks();
