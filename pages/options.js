@@ -9,9 +9,14 @@ function save_options() {
 	chrome.extension.getBackgroundPage().pause = true;
   else
 	chrome.extension.getBackgroundPage().pause = false;
+	
+  localStorage['ytSpeed'] = document.getElementById('speed').value;
+  chrome.extension.getBackgroundPage().speed = localStorage['ytSpeed'];
 }
 
 function restore_options() {
+  var speed = localStorage['ytSpeed'];
+  document.getElementById('speed').value = speed;
   var highpref = localStorage["ytHighPref"];
   if(highpref === "true")
 	document.getElementById("highpref").checked = true;
@@ -26,3 +31,5 @@ function restore_options() {
 document.addEventListener('DOMContentLoaded', restore_options);
 document.querySelector('#highpref').addEventListener('change', save_options);
 document.querySelector('#pause').addEventListener('change', save_options);
+document.querySelector('#speed').addEventListener('change', save_options);
+

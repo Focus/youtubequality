@@ -1,6 +1,8 @@
 var res = localStorage['ytQuality'];
+var speed = localStorage['ytSpeed'];
 var highpref = false;
 var pause = false;
+
 if(localStorage['ytHighPref'] === "true")
 		highpref = true;
 if(localStorage['ytPause'] === "true")
@@ -18,6 +20,8 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
 				sendResponse({status: highpref});
 		else if (request.method === "getPause")
 				sendResponse({status: pause});
+		else if (request.method === "getSpeed")
+				sendResponse({status: speed});
 		else
 				sendResponse({});
 });

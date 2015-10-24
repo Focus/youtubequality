@@ -4,6 +4,7 @@ var sytqQuality = 2;
 var sytqHighPref = false;
 var sytqPause = false;
 var sytqPlayer;
+var sytqSpeed = 1;
 
 var hooked = false;
 
@@ -73,6 +74,7 @@ function changeQuality(){
 		}
 		if(found)
 			sytqPlayer.setPlaybackQuality(quality_opt[i]);
+			sytqPlayer.setPlaybackRate(sytqSpeed);
 		if(sytqPause)
 			forcePause();
 		else
@@ -102,11 +104,12 @@ function ytPlayerSetHooks(){
 	changeQuality();
 }
 
-function ytPlayerHook(player, quality, highpref, pause){
+function ytPlayerHook(player, speed, quality, highpref, pause){
 	if(hooked || typeof player !== 'object')
 		return;
 	//console.log('ytPlayerHook');
 	hooked = true;
+	sytqSpeed = speed;
 	sytqQuality = quality;
 	sytqHighPref = highpref;
 	sytqPause = pause;
