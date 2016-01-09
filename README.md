@@ -1,7 +1,7 @@
 Youtube Quality
 ===============
 
-Chrome extension to automatically set YouTube quality on videos and many other things.
+Chrome extension to automatically set YouTube quality on videos and many other things including default speed.
 
 Installing the Stable Version
 -----------------------------

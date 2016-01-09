@@ -14,7 +14,7 @@ function injectCode(){
 		
 		inj1.innerHTML =
 				["function onYouTubePlayerReady(player){",
-				 "		setTimeout(function(){ytPlayerHook(player, " + quality + ", " + highpref + ", " + pause + ");},10);",
+				 "		setTimeout(function(){ytPlayerHook(player, " + speed + ", " + quality + ", " + highpref + ", " + pause + ");},10);",
 				 "}"].join('\n');
 		docFrag.appendChild(inj0);
 		docFrag.appendChild(inj1);
@@ -28,8 +28,11 @@ chrome.extension.sendRequest({method: "getStatus"}, function(response) {
 		chrome.extension.sendRequest({method: "getHighPref"}, function(response) {
 			highpref = response.status;
 			chrome.extension.sendRequest({method: "getPause"}, function(response) {
-					pause = response.status;
-					injectCode();
+                pause = response.status;
+                chrome.extension.sendRequest({method: "getSpeed"}, function(response) {
+                speed = response.status;
+                    injectCode();
 			});
 		});
+	});
 });
