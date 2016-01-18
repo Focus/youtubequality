@@ -5,7 +5,7 @@ function click(e) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-	document.getElementById(chrome.extension.getBackgroundPage().res).className = 'current';
+	document.getElementById(chrome.extension.getBackgroundPage().res).className += ' selected';
 	var divs = document.querySelectorAll('div');
 	for (var i = 0; i < divs.length; i++) {
 		divs[i].addEventListener('click', click);

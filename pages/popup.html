@@ -3,53 +3,27 @@
 
 <head>
   <title>Set Page Color Popup</title>
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
   <style>
     div {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 14px;
-      color: #123d54;
-      padding: 1px 2px;
-      border-radius: 3px;
-      border: 1px solid #999999;
-      border: 1px solid #000000;
-      box-shadow: 0px 1px 3px rgba(000, 000, 000, 0.5), inset 0px 0px 1px rgba(255, 255, 255, 1);
-      text-shadow: 0px -1px 0px rgba(000, 000, 000, 0.7), 0px 1px 0px rgba(255, 255, 255, 0.3);
-      width: 50px;
-      text-align: center;
-      cursor: pointer;
+      width: 100%;
     }
-
-    body {
-      overflow: hidden;
-      margin: 0px;
-      padding: 0px;
-      background: white;
-    }
-
-    div:first-child {
-      margin-top: 0px;
-    }
-
-    div:hover {
-      background: #65CC5C;
-    }
-
-    .current {
-      background: #b57f7f;
+    .selected {
+      background: rgb(28, 184, 65);
     }
   </style>
   <script src="popup.js"></script>
 </head>
 
 <body>
-  <div id="0">2160</div>
-  <div id="1">1440</div>
-  <div id="2">1080</div>
-  <div id="3">720</div>
-  <div id="4">480</div>
-  <div id="5">360</div>
-  <div id="6">240</div>
-  <div id="7">144</div>
+  <div id="0" class="pure-button">2160</div>
+  <div id="1" class="pure-button">1440</div>
+  <div id="2" class="pure-button">1080</div>
+  <div id="3" class="pure-button">720</div>
+  <div id="4" class="pure-button">480</div>
+  <div id="5" class="pure-button">360</div>
+  <div id="6" class="pure-button">240</div>
+  <div id="7" class="pure-button">144</div>
 </body>
 
 </html>
