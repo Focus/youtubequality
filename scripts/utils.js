@@ -101,6 +101,7 @@ function ytPlayerSetHooks(){
 		return;
 	}
 	sytqPlayer.addEventListener("onStateChange", ytPlayerChange);
+	autotoggle();	
 	changeQuality();
 }
 
@@ -116,3 +117,32 @@ function ytPlayerHook(player, speed, quality, highpref, pause){
 	sytqPlayer = player;
 	ytPlayerSetHooks();
 }
+
+var min;
+var current;
+var count;
+
+function autotoggle(){
+  if(typeof sytqPlayer.getPlayerState === 'undefined' || sytqPlayer.getPlayerState() < 0 ){
+    setTimeout( autotoggle ,200);
+    return;
+  }
+
+  current = sytqPlayer.getPlaybackQuality();
+  count = sytqPlayer.getAvailableQualityLevels();
+  min = count[count.length - 2];
+
+  window.addEventListener('focus', function() {
+    sytqPlayer.setPlaybackQuality(current);
+    console.log(current);
+  });
+
+  window.addEventListener('blur', function() {
+    current = sytqPlayer.getPlaybackQuality();
+    sytqPlayer.setPlaybackQuality(min);
+    console.log(min);
+  });
+}
+
+
+

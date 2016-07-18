@@ -3,6 +3,7 @@ var speed = localStorage['ytSpeed'];
 var highpref = false;
 var pause = false;
 
+
 if(localStorage['ytHighPref'] === "true")
 		highpref = true;
 if(localStorage['ytPause'] === "true")
