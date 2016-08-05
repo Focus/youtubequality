@@ -4,6 +4,7 @@ var sytqQuality = 2;
 var sytqHighPref = false;
 var sytqPause = false;
 var sytqPlayer;
+var sytqSmartSave = true;
 var sytqSpeed = 1;
 
 var hooked = false;
@@ -101,18 +102,52 @@ function ytPlayerSetHooks(){
 		return;
 	}
 	sytqPlayer.addEventListener("onStateChange", ytPlayerChange);
+	autotoggle();
 	changeQuality();
 }
 
-function ytPlayerHook(player, speed, quality, highpref, pause){
+function ytPlayerHook(player, speed, quality, highpref, pause, smart_save){
 	if(hooked || typeof player !== 'object')
 		return;
-	//console.log('ytPlayerHook');
+	console.log('ytPlayerHook');
 	hooked = true;
 	sytqSpeed = speed;
 	sytqQuality = quality;
 	sytqHighPref = highpref;
 	sytqPause = pause;
+	sytqSmartSave = smart_save;
 	sytqPlayer = player;
 	ytPlayerSetHooks();
+}
+
+var min;
+var current;
+var count;
+
+function autotoggle(){
+  if(typeof sytqPlayer.getPlayerState === 'undefined' || sytqPlayer.getPlayerState() < 0 ){
+    setTimeout( autotoggle ,200);
+    return;
+  }
+
+  current = sytqPlayer.getPlaybackQuality();
+  count = sytqPlayer.getAvailableQualityLevels();
+  min = count[count.length - 2];
+
+  window.addEventListener('focus', function() {
+		console.log('focus');
+		if( sytqSmartSave === true ) {
+    	sytqPlayer.setPlaybackQuality(current);
+    	console.log(current);
+		}
+  });
+
+  window.addEventListener('blur', function() {
+		console.log('blur');
+		if( sytqSmartSave === true ) {
+    	current = sytqPlayer.getPlaybackQuality();
+    	sytqPlayer.setPlaybackQuality(min);
+    	console.log(min);
+		}
+	});
 }

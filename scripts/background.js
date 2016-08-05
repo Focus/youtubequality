@@ -1,7 +1,11 @@
 var res = localStorage['ytQuality'];
 var speed = localStorage['ytSpeed'];
+if(isNaN(speed))
+	speed = 1;
+var smart_save = localStorage['ytSmartSave'];
 var highpref = false;
 var pause = false;
+
 
 if(localStorage['ytHighPref'] === "true")
 		highpref = true;
@@ -22,6 +26,8 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
 				sendResponse({status: pause});
 		else if (request.method === "getSpeed")
 				sendResponse({status: speed});
+		else if (request.method === "getSmartSave")
+		 		sendResponse({status: smart_save});
 		else
 				sendResponse({});
 });
