@@ -27,7 +27,7 @@ function forcePause(){
 }
 
 function changeQuality(){
-	//console.log(sytqPlayer);
+	console.log(sytqPlayer);
 	if(typeof sytqPlayer.getPlayerState !== 'undefined' && sytqPlayer.getPlayerState() >= 0){
 		var levels = sytqPlayer.getAvailableQualityLevels();
 		if(levels.length <= 0){		//Sometimes in HTML5 players the api isn't ready, even though it should be.
@@ -39,39 +39,45 @@ function changeQuality(){
 		//console.log(sytqQuality);
 		var i = sytqQuality;
 		var found = false;
-		if(sytqHighPref) // high quality is preferable
-		{
-			for(i = sytqQuality; i >= 0; i--){
-				if(levels.indexOf(quality_opt[i]) >=0 ){
-					found = true;
-					break;
-				}
-			}
-			if(!found){
-				for(i = sytqQuality + 1; i < 8; i++){
+		if(document.hasFocus()) {
+			if(sytqHighPref) // high quality is preferable
+			{
+				for(i = sytqQuality; i >= 0; i--){
 					if(levels.indexOf(quality_opt[i]) >=0 ){
 						found = true;
 						break;
+					}
+				}
+				if(!found){
+					for(i = sytqQuality + 1; i < 8; i++){
+						if(levels.indexOf(quality_opt[i]) >=0 ){
+							found = true;
+							break;
+						}
+					}
+				}
+			}
+			else // low quality is preferable
+			{
+				for(i = sytqQuality; i < 8; i++){
+					if(levels.indexOf(quality_opt[i]) >=0 ){
+						found = true;
+						break;
+					}
+				}
+				if(!found){
+					for(i = sytqQuality - 1; i >= 0; i--){
+						if(levels.indexOf(quality_opt[i]) >=0 ){
+							found = true;
+							break;
+						}
 					}
 				}
 			}
 		}
-		else // low quality is preferable
-		{
-			for(i = sytqQuality; i < 8; i++){
-				if(levels.indexOf(quality_opt[i]) >=0 ){
-					found = true;
-					break;
-				}
-			}
-			if(!found){
-				for(i = sytqQuality - 1; i >= 0; i--){
-					if(levels.indexOf(quality_opt[i]) >=0 ){
-						found = true;
-						break;
-					}
-				}
-			}
+		else{
+			found = true;
+			i = quality_opt.length - 2	;
 		}
 		if(found)
 			sytqPlayer.setPlaybackQuality(quality_opt[i]);
@@ -126,7 +132,7 @@ var count;
 
 function autotoggle(){
   if(typeof sytqPlayer.getPlayerState === 'undefined' || sytqPlayer.getPlayerState() < 0 ){
-    setTimeout( autotoggle ,200);
+    setTimeout( autotoggle ,600);
     return;
   }
 
@@ -145,6 +151,7 @@ function autotoggle(){
   window.addEventListener('blur', function() {
 		console.log('blur');
 		if( sytqSmartSave === true ) {
+			sytqHighPref = false;
     	current = sytqPlayer.getPlaybackQuality();
     	sytqPlayer.setPlaybackQuality(min);
     	console.log(min);
