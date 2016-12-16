@@ -1,5 +1,9 @@
 Set Your Quality (c) Bati Sengul 2013
 
+= 1.9 to 1.10 =
+* Smart save added (thanks to Aditya Dewan)
+* Bug fixes
+
 = 1.8 to 1.9 =
 * Option to change default speed (thanks to Rahul)
 * New logo and buttons

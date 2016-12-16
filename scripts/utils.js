@@ -27,7 +27,7 @@ function forcePause(){
 }
 
 function changeQuality(){
-	console.log(sytqPlayer);
+	//console.log(sytqPlayer);
 	if(typeof sytqPlayer.getPlayerState !== 'undefined' && sytqPlayer.getPlayerState() >= 0){
 		var levels = sytqPlayer.getAvailableQualityLevels();
 		if(levels.length <= 0){		//Sometimes in HTML5 players the api isn't ready, even though it should be.
@@ -115,7 +115,7 @@ function ytPlayerSetHooks(){
 function ytPlayerHook(player, speed, quality, highpref, pause, smart_save){
 	if(hooked || typeof player !== 'object')
 		return;
-	console.log('ytPlayerHook');
+	//console.log('ytPlayerHook');
 	hooked = true;
 	sytqSpeed = speed;
 	sytqQuality = quality;
@@ -141,20 +141,20 @@ function autotoggle(){
   min = count[count.length - 2];
 
   window.addEventListener('focus', function() {
-		console.log('focus');
+		//console.log('focus');
 		if( sytqSmartSave === true ) {
     	sytqPlayer.setPlaybackQuality(current);
-    	console.log(current);
+    	//console.log(current);
 		}
   });
 
   window.addEventListener('blur', function() {
-		console.log('blur');
+		//console.log('blur');
 		if( sytqSmartSave === true ) {
 			sytqHighPref = false;
     	current = sytqPlayer.getPlaybackQuality();
     	sytqPlayer.setPlaybackQuality(min);
-    	console.log(min);
+    	//console.log(min);
 		}
 	});
 }
